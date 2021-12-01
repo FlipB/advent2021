@@ -1,0 +1,12 @@
+[package]
+name = "advent2021"
+version = "0.1.0"
+authors = ["Filip Björck <filip.bjorck@gmail.com>"]
+edition = "2021"
+
+[[bin]]
+name = "main"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "*"
