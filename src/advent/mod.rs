@@ -1,2 +1,3 @@
 pub mod day1;
-mod input;
+pub mod day2;
+pub mod input;

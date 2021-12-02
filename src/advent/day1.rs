@@ -1,22 +1,17 @@
-use std::fs::File;
-use std::path::Path;
-
 use anyhow::Result;
 
 use super::input;
 
-pub fn print_depth_increases(input_path: &Path) -> Result<()> {
-    let input_path = input_path.join("day1.txt");
-    let file = File::open(input_path)?;
-    let values = input::get_input_numbers(file)?;
+pub fn print_depth_increases(input: impl std::io::Read) -> Result<()> {
+    let values = input::get_input_numbers(input)?;
 
     println!(
-        "Depth increases = {}",
+        "Depth increases: {}",
         get_depth_increases(values.clone().into_iter())
     );
 
     println!(
-        "Windowed depth increases = {}",
+        "Windowed depth increases: {}",
         get_depth_increases(summed_windows(values.as_slice()))
     );
     Ok(())

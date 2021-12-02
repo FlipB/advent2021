@@ -1,7 +1,13 @@
 // mod input
 
 use anyhow::Result;
+use std::fs::File;
 use std::io::BufRead;
+use std::path::Path;
+
+pub fn read_file(file_path: impl AsRef<Path>) -> Result<impl std::io::Read> {
+    Ok(File::open(file_path)?)
+}
 
 pub fn get_input_numbers(f: impl std::io::Read) -> Result<Vec<i64>> {
     let buf = std::io::BufReader::new(f);
@@ -22,6 +28,15 @@ pub fn get_input_numbers(f: impl std::io::Read) -> Result<Vec<i64>> {
         })?;
 
     Ok(numbers)
+}
+
+pub fn get_input_lines(f: impl std::io::Read) -> Result<Vec<String>> {
+    let buf = std::io::BufReader::new(f);
+
+    let v = buf
+        .lines()
+        .collect::<std::result::Result<Vec<String>, std::io::Error>>()?;
+    Ok(v)
 }
 
 #[test]
