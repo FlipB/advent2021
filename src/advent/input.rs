@@ -39,6 +39,37 @@ pub fn get_input_lines(f: impl std::io::Read) -> Result<Vec<String>> {
     Ok(v)
 }
 
+pub fn lines_as_char_columns(lines: Vec<String>) -> impl Iterator<Item = Vec<char>> {
+    let rows = lines
+        .into_iter()
+        .map(|s| s.chars().collect::<Vec<char>>().into_iter())
+        .collect();
+
+    MultiZipper { iterators: rows }
+}
+
+/// MultiZipper zips multiple iterators
+struct MultiZipper<I>
+where
+    I: Iterator,
+{
+    iterators: Vec<I>,
+}
+
+impl<I, T> Iterator for MultiZipper<I>
+where
+    I: Iterator<Item = T>,
+{
+    type Item = Vec<T>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.iterators
+            .iter_mut()
+            .map(|it| it.next())
+            .collect::<Option<Vec<T>>>()
+    }
+}
+
 #[test]
 fn test_get_input_numbers() {
     let s = r"
@@ -50,6 +81,19 @@ fn test_get_input_numbers() {
         ";
     let v = vec![12, 14, 12, 0, 1];
     let iter = get_input_numbers(s.as_bytes()).unwrap();
+
+    assert!(iter.into_iter().eq(v.into_iter()));
+}
+
+#[test]
+fn test_get_input_columns() {
+    let s = r"12
+12
+12
+12";
+    let v = vec![vec!['1', '1', '1', '1'], vec!['2', '2', '2', '2']];
+    let lines = get_input_lines(s.as_bytes()).unwrap();
+    let iter = lines_as_char_columns(lines);
 
     assert!(iter.into_iter().eq(v.into_iter()));
 }
