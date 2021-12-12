@@ -3,7 +3,7 @@ use anyhow::Result;
 use super::input;
 
 pub fn print_depth_increases(input: impl std::io::Read) -> Result<()> {
-    let values = input::get_input_numbers(input)?;
+    let (values, _): (Vec<i64>, usize) = input::get_input_numbers(input)?;
 
     println!(
         "Depth increases: {}",
