@@ -16,6 +16,8 @@ fn main() -> Result<()> {
     day10::print_result(read_file("./data/day10.txt")?)?;
     day11::print_result(read_file("./data/day11.txt")?)?;
     day12::print_result(read_file("./data/day12.txt")?)?;
+    day13::print_result(read_file("./data/day13.txt")?)?;
+    day14::print_result(read_file("./data/day14.txt")?)?;
 
     Ok(())
 }
