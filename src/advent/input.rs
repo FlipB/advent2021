@@ -2,7 +2,7 @@
 
 use anyhow::Result;
 use std::fs::File;
-use std::io::{BufRead, Read};
+use std::io::BufRead;
 use std::num::ParseIntError;
 use std::path::Path;
 
@@ -33,6 +33,19 @@ where
             })?;
 
     Ok(numbers)
+}
+
+pub fn get_input_hex(mut f: impl std::io::Read) -> Result<Vec<u8>> {
+    let mut buf = String::new();
+    f.read_to_string(&mut buf)?;
+    let buf = buf.trim();
+
+    let v: Result<Vec<_>, std::num::ParseIntError> = (0..buf.len())
+        .step_by(2)
+        .map(|i| u8::from_str_radix(&buf[i..i + 2], 16))
+        .collect();
+
+    v.map_err(|_e| anyhow::Error::msg("bad input"))
 }
 
 pub fn get_input_number_grid<T>(f: impl std::io::Read) -> Result<(Vec<T>, usize)>

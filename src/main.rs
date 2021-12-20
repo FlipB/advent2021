@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use anyhow::Result;
 
 mod advent;
@@ -18,6 +20,11 @@ fn main() -> Result<()> {
     day12::print_result(read_file("./data/day12.txt")?)?;
     day13::print_result(read_file("./data/day13.txt")?)?;
     day14::print_result(read_file("./data/day14.txt")?)?;
+    day15::print_result(read_file("./data/day15.txt")?)?;
+    day16::print_result(read_file("./data/day16.txt")?)?;
+
+    day18::print_result(read_file("./data/day18.txt")?)?;
+    day19::print_result(read_file("./data/day19.txt")?)?;
 
     Ok(())
 }

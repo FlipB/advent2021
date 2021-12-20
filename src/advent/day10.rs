@@ -17,7 +17,7 @@ pub fn print_result(input: impl std::io::Read) -> Result<()> {
             }
         }
 
-        let closer = stack.autocomplete_close();
+        let _closer = stack.autocomplete_close();
         let score = stack
             .autocomplete_close()
             .chars()
