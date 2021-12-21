@@ -22,7 +22,7 @@ fn main() -> Result<()> {
     day14::print_result(read_file("./data/day14.txt")?)?;
     day15::print_result(read_file("./data/day15.txt")?)?;
     day16::print_result(read_file("./data/day16.txt")?)?;
-
+    day17::print_result(read_file("./data/day17.txt")?)?;
     day18::print_result(read_file("./data/day18.txt")?)?;
     day19::print_result(read_file("./data/day19.txt")?)?;
 
